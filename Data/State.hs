@@ -28,7 +28,7 @@ where
   --Or
   --Siginificant_isolates "Mycobacterium tuberculosis"
 
-  data InputState = IPCTemplate | Organism | CompoundOperator | ComparisonOperator | SearchParameter  deriving (Eq)
+  data InputState = First | IPCTemplate | Organism | CompoundOperator | ComparisonOperator | SearchParameter  deriving (Eq, Show)
 
   stringInputStateMap :: Map String InputState
   stringInputStateMap = fromList [("Significant_isolates", IPCTemplate)]
@@ -41,10 +41,10 @@ where
       trust_code :: String,
       templates :: Map TemplateName [TemplateValue],
       rules :: Map Organism [IPCExp],
-      currentOrganism :: Organism,
+      current_organism :: Organism,
       input_state :: InputState,
       rule_counter :: Int
-  }
+  } deriving (Show)
 
   -- initialState :: IPCConfiguration
   -- initialState = IPCConfiguration {

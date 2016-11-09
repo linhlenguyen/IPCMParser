@@ -1,0 +1,44 @@
+<IPC_Rule>
+<rule id type="Int32">0</rule_id>
+<parent_rule_id type="Int32">0</parent_rule_id>
+<organism_id type="Int32">0</organism_id>
+<rule_type_id type="Int32">1</rule_type_id>
+<rule_operator type="String">And</rule_operator>
+<parameter_name type="String"xsi:nil="true"/>
+<parameter_value type="String"xsi:nil="true"/>
+<template_id type="Int32">xsi:nil="true" />
+<template_input type="String"xsi:nil="true"/>
+</IPC_Rule>
+<IPC_Rule>
+<rule id type="Int32">0</rule_id>
+<parent_rule_id type="Int32">0</parent_rule_id>
+<organism_id type="Int32">0</organism_id>
+<rule_type_id type="Int32">2</rule_type_id>
+<rule_operator type="String">Is</rule_operator>
+<parameter_name type="String">SpecimenType</parameter_name>
+<parameter_value type="String">Faeces</parameter_value>
+<template_id type="Int32">xsi:nil="true" />
+<template_input type="String"xsi:nil="true"/>
+</IPC_Rule>
+<IPC_Rule>
+<rule id type="Int32">0</rule_id>
+<parent_rule_id type="Int32">0</parent_rule_id>
+<organism_id type="Int32">0</organism_id>
+<rule_type_id type="Int32">2</rule_type_id>
+<rule_operator type="String">Includes</rule_operator>
+<parameter_name type="String">TestText</parameter_name>
+<parameter_value type="String">Campylobacter PCR</parameter_value>
+<template_id type="Int32">xsi:nil="true" />
+<template_input type="String"xsi:nil="true"/>
+</IPC_Rule>
+<IPC_Rule>
+<rule id type="Int32">0</rule_id>
+<parent_rule_id type="Int32">0</parent_rule_id>
+<organism_id type="Int32">0</organism_id>
+<rule_type_id type="Int32">5</rule_type_id>
+<rule_operator type="String"xsi:nil="true"/>
+<parameter_name type="String"xsi:nil="true"/>
+<parameter_value type="String"xsi:nil="true"/>
+<template_id type="Int32">0</template_id>
+<template_input type="String">Campylobacter jejuni</template_input>
+</IPC_Rule>
