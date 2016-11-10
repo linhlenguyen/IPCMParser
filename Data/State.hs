@@ -13,7 +13,13 @@ where
   --"{0} Identified"
   --"{0} positive","positive {0}"
   --"(?<!not)positive"
-
+  -- [("Significant_isolates",
+  --   ["{0} DNA DECTECTED by PCR",
+  --   "{0} ISOLATED",
+  --   "{0} Identified",
+  --   "{0} Positive",
+  --   "Positive {0}"
+  --   ])],
   --Campylobacter
   --And
   --Is Specimen "Faeces"
@@ -33,24 +39,12 @@ where
   stringInputStateMap :: Map String InputState
   stringInputStateMap = fromList [("Significant_isolates", IPCTemplate)]
 
-  type TemplateName = String
-  type TemplateValue = String
-
+  type RuleTag = String
   --Store IPC states
   data IPCConfiguration = IPCConfiguration{
       trust_code :: String,
-      templates :: Map TemplateName [TemplateValue],
-      rules :: Map Organism [IPCExp],
-      current_organism :: Organism,
-      input_state :: InputState,
-      rule_counter :: Int
+      rules :: Map RuleTag [IPCExp]
   } deriving (Show)
-
-  -- initialState :: IPCConfiguration
-  -- initialState = IPCConfiguration {
-  --   trust_code = "Hello",
-  --   rule_counter = 0
-  -- }
 
   validateInput :: InputState -> String -> Bool
   validateInput state input@(x:xs) = case state of {

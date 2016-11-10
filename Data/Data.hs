@@ -24,12 +24,6 @@ SearchValue
       ("MRSA Negative", 37), ("AMPC", 38)]
 
     type RuleOperator = String
-    -- matchOperator :: Map RuleOperator Int
-    -- matchOperator = fromList [("And", 1), ("Or", 1), ("Is", 2),
-    --   ("Is_not", 2), ("Includes", 2),
-    --   ("Excludes", 2), ("Template", 4),
-    --   ("Significant isolates", 5), ("Non-significant isolates", 5)] --Translate to Like and NotLike
-
     operatorStringMap :: Map RuleOperator String
     operatorStringMap = fromList [("Is", "Like"), ("And", "And"), ("Or", "Or"),
       ("Includes", "Like")]
