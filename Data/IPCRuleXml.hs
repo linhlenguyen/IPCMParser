@@ -9,7 +9,7 @@ toXML
     data IPCRuleXml = IPCRuleXml {
         rule_id :: Maybe Int,
         parent_rule_id :: Maybe Int,
-        organism_id :: Maybe Int,
+        organism_id :: Maybe String,
         rule_type_id :: Int,
         rule_operator :: Maybe RuleOperator,
         parameter_name :: Maybe SearchParameter,
@@ -17,6 +17,12 @@ toXML
         template :: Maybe Int,
         template_input :: Maybe String
     } deriving (Show)
+
+    instance Eq IPCRuleXml where
+      xml1 == xml2 = rule_id xml1 == rule_id xml2
+
+    instance Ord IPCRuleXml where
+      xml1 <= xml2 = rule_id xml1 <= rule_id xml2
 
     toXML :: IPCRuleXml -> String
     toXML r = "<IPC_Rule>\n" ++ ruleId ++ parentRuleId ++ organismID ++ ruleTypeId ++ ruleOperator ++ parameterName ++ parameterValue ++ templateID ++ templateInput ++ "</IPC_Rule>\n"
@@ -26,7 +32,7 @@ toXML
         parentRuleId = case parent_rule_id r of {Nothing -> "<parent_rule_id type=\"Int32\"xsi:nil=\"true\"/>\n";
                                                 Just a -> "<parent_rule_id type=\"Int32\">" ++ show a ++ "</parent_rule_id>\n";}
         organismID = case organism_id r of {Nothing -> "<organism_id type=\"Int32\">xsi:nil=\"true\" />\n";
-                                            Just a -> "<organism_id type=\"Int32\">" ++ show a ++ "</organism_id>\n";}
+                                            Just a -> "<organism_id type=\"Int32\">" ++ show (organismIDMap!a) ++ "</organism_id>\n";}
         ruleTypeId = "<rule_type_id type=\"Int32\">" ++ show (rule_type_id r) ++ "</rule_type_id>\n";
         ruleOperator = case rule_operator r of {Nothing -> "<rule_operator type=\"String\"xsi:nil=\"true\"/>\n";
                                                Just a -> "<rule_operator type=\"String\">" ++ a ++ "</rule_operator>\n";}

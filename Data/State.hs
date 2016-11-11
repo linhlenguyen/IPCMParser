@@ -34,7 +34,7 @@ where
   --Or
   --Siginificant_isolates "Mycobacterium tuberculosis"
 
-  data InputState = First | IPCTemplate | Organism | CompoundOperator | ComparisonOperator | SearchParameter  deriving (Eq, Show)
+  data InputState = First | IPCTemplate | CompoundOperator | ComparisonOperator | SearchParameter  deriving (Eq, Show)
 
   stringInputStateMap :: Map String InputState
   stringInputStateMap = fromList [("Significant_isolates", IPCTemplate)]
@@ -49,7 +49,6 @@ where
   validateInput :: InputState -> String -> Bool
   validateInput state input@(x:xs) = case state of {
     IPCTemplate -> False; --Accept strings
-    Organism -> False; --Accept CompoundOperator or ComparisonOperator
     CompoundOperator -> False; -- Accept CompoundOperator or ComparisonOperator
     ComparisonOperator -> False; -- Accept SearchParameter
     SearchParameter -> False; --Accept string as search Value
