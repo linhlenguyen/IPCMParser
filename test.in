@@ -1,0 +1,61 @@
+Significant_isolates
+"{0} ISOLATED"
+"{0} Identified"
+"{0} Positive"
+"Positive {0}"
+
+Campylobacter
+And Is Specimen "Faeces"
+    Includes Test_text "Campylobacter PCR"
+    Significant_isolates "Campylobacter jejuni"
+
+CD-GDH
+Includes Test_text "C.difficile Antigen"
+
+CDT
+Includes Test_text "C.difficile Toxin A & B"
+
+CPE
+And Is_not Specimen "Blood culture"
+    Includes Test_text "CPE"
+
+ESBL
+Includes Test_text "An extended spectrum beta-lactamase producer"
+
+Influenza
+Includes Test_test "Influenza (A|B) PCR"
+
+MRSA
+And Is_not Specimen "Blood culture"
+    Significant_isolates "Staph. aureus(MRSA)"
+
+Norovirus
+And Is Specimen "Faeces"
+    Includes Test_text "Norovirus"
+
+Rotavirus
+Includes Test_text "Rotavirus ELISA"
+
+RSV
+Includes Test_text "RSV(immunochromatographic)"
+
+Salmonella
+And Is Specimen "Faeces"
+    And Siginificant_isolates "Salmonella"
+        Includes Test_text "Salmonella PCR"
+
+Shigella
+And Is Specimen "Faeces"
+    Includes Test_text "Shigella/EIEC PCR"
+
+Tuberculosis
+Or Significant_isolates "Mycobacterium tuberculosis"
+   Significant_isolates "Acid-alcohol fast bacilli"
+   Significant_isolates "Mycobacterium sp."
+
+Varicella-zoster_virus
+Includes Test_text "varicella zoster virus"
+
+VRE
+And Significant_isolates "Enterococcus"
+    Includes Test_text "vancomycin resistant"

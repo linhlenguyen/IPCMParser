@@ -3,14 +3,28 @@ split,
 match,
 match',
 toLower,
-toWords
+toWords,
+parseFile,
+parseString
 )
 where
+  parseFile :: FilePath -> IO ()
+  parseFile filePath = do
+    text <- readFile filePath
+    putStrLn $ show (parseString False $ toWords text)
+
+  parseString :: Bool -> [String] -> [String]
+  parseString _ [] = []
+  parseString _ [x] = x:[]
+  parseString False (x:xs) = if (head x) == '"' then parseString True ((tail x) : xs)
+                             else x : parseString False xs
+  parseString True (x:xs) = if (last x) == '"' then (init x) : parseString False xs
+                             else parseString True ((x ++ " " ++ (head xs)):(tail xs))
 
   toWords :: String -> [String]
   toWords (x:xs) = reverse $ map reverse $ foldl foldingFnc [[x]] xs
     where foldingFnc :: [String] -> Char -> [String]
-          foldingFnc ls c = if any (\k -> k == c) [' ',',',';'] then
+          foldingFnc ls c = if any (\k -> k == c) [' ',',',';','\n','\r'] then
                               if (null $ head ls) then ls
                               else [] : ls
                             else (c : head ls) : tail ls
