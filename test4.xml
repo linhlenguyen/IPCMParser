@@ -82,7 +82,7 @@
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
 <parameter_name type="String">SpecimenType</parameter_name>
-<parameter_value type="String">Faeces</parameter_value>
+<parameter_value type="String">^Faeces$</parameter_value>
 <template_id type="Int32" xsi:nil="true" />
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
@@ -90,27 +90,16 @@
 <rule_id type="Int32">9</rule_id>
 <parent_rule_id type="Int32">7</parent_rule_id>
 <organism_id type="Int32">24</organism_id>
-<rule_type_id type="Int32">2</rule_type_id>
-<rule_operator type="String">Like</rule_operator>
-<parameter_name type="String">TestText</parameter_name>
-<parameter_value type="String">Campylobacter PCR</parameter_value>
-<template_id type="Int32" xsi:nil="true" />
-<template_input type="String" xsi:nil="true"/>
-</IPC_Rule>
-<IPC_Rule>
-<rule_id type="Int32">10</rule_id>
-<parent_rule_id type="Int32">7</parent_rule_id>
-<organism_id type="Int32">24</organism_id>
 <rule_type_id type="Int32">5</rule_type_id>
 <rule_operator type="String" xsi:nil="true"/>
 <parameter_name type="String" xsi:nil="true"/>
 <parameter_value type="String" xsi:nil="true"/>
 <template_id type="Int32">1</template_id>
-<template_input type="String">Campylobacter jejuni</template_input>
+<template_input type="String">Campylobacter (jejuni|PCR)</template_input>
 </IPC_Rule>
 <IPC_Rule>
-<rule_id type="Int32">11</rule_id>
-<parent_rule_id type="Int32">11</parent_rule_id>
+<rule_id type="Int32">10</rule_id>
+<parent_rule_id type="Int32" xsi:nil="true"/>
 <organism_id type="Int32">29</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
@@ -120,8 +109,8 @@
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
 <IPC_Rule>
-<rule_id type="Int32">12</rule_id>
-<parent_rule_id type="Int32">12</parent_rule_id>
+<rule_id type="Int32">11</rule_id>
+<parent_rule_id type="Int32" xsi:nil="true"/>
 <organism_id type="Int32">7</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
@@ -131,19 +120,41 @@
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
 <IPC_Rule>
+<rule_id type="Int32">12</rule_id>
+<parent_rule_id type="Int32" xsi:nil="true"/>
+<organism_id type="Int32">35</organism_id>
+<rule_type_id type="Int32">1</rule_type_id>
+<rule_operator type="String">And</rule_operator>
+<parameter_name type="String" xsi:nil="true"/>
+<parameter_value type="String" xsi:nil="true"/>
+<template_id type="Int32" xsi:nil="true" />
+<template_input type="String" xsi:nil="true"/>
+</IPC_Rule>
+<IPC_Rule>
+<rule_id type="Int32">13</rule_id>
+<parent_rule_id type="Int32">12</parent_rule_id>
+<organism_id type="Int32">35</organism_id>
+<rule_type_id type="Int32">2</rule_type_id>
+<rule_operator type="String">NotLike</rule_operator>
+<parameter_name type="String">SpecimenType</parameter_name>
+<parameter_value type="String">^Blood culture$</parameter_value>
+<template_id type="Int32" xsi:nil="true" />
+<template_input type="String" xsi:nil="true"/>
+</IPC_Rule>
+<IPC_Rule>
 <rule_id type="Int32">14</rule_id>
-<parent_rule_id type="Int32">14</parent_rule_id>
-<organism_id type="Int32">8</organism_id>
+<parent_rule_id type="Int32">12</parent_rule_id>
+<organism_id type="Int32">35</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
 <parameter_name type="String">TestText</parameter_name>
-<parameter_value type="String">An extended spectrum beta-lactamase producer</parameter_value>
+<parameter_value type="String">CPE</parameter_value>
 <template_id type="Int32" xsi:nil="true" />
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
 <IPC_Rule>
 <rule_id type="Int32">15</rule_id>
-<parent_rule_id type="Int32">15</parent_rule_id>
+<parent_rule_id type="Int32" xsi:nil="true"/>
 <organism_id type="Int32">34</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
@@ -211,16 +222,16 @@
 <rule_id type="Int32">21</rule_id>
 <parent_rule_id type="Int32">19</parent_rule_id>
 <organism_id type="Int32">12</organism_id>
-<rule_type_id type="Int32">2</rule_type_id>
-<rule_operator type="String">Like</rule_operator>
-<parameter_name type="String">TestText</parameter_name>
-<parameter_value type="String">Norovirus</parameter_value>
-<template_id type="Int32" xsi:nil="true" />
-<template_input type="String" xsi:nil="true"/>
+<rule_type_id type="Int32">5</rule_type_id>
+<rule_operator type="String" xsi:nil="true"/>
+<parameter_name type="String" xsi:nil="true"/>
+<parameter_value type="String" xsi:nil="true"/>
+<template_id type="Int32">1</template_id>
+<template_input type="String">Norovirus</template_input>
 </IPC_Rule>
 <IPC_Rule>
 <rule_id type="Int32">22</rule_id>
-<parent_rule_id type="Int32">22</parent_rule_id>
+<parent_rule_id type="Int32" xsi:nil="true"/>
 <organism_id type="Int32">14</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
@@ -231,7 +242,7 @@
 </IPC_Rule>
 <IPC_Rule>
 <rule_id type="Int32">23</rule_id>
-<parent_rule_id type="Int32">23</parent_rule_id>
+<parent_rule_id type="Int32" xsi:nil="true"/>
 <organism_id type="Int32">27</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
@@ -258,7 +269,7 @@
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
 <parameter_name type="String">SpecimenType</parameter_name>
-<parameter_value type="String">Faeces</parameter_value>
+<parameter_value type="String">^Faeces$</parameter_value>
 <template_id type="Int32" xsi:nil="true" />
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
@@ -266,37 +277,26 @@
 <rule_id type="Int32">26</rule_id>
 <parent_rule_id type="Int32">24</parent_rule_id>
 <organism_id type="Int32">26</organism_id>
-<rule_type_id type="Int32">1</rule_type_id>
-<rule_operator type="String">Or</rule_operator>
-<parameter_name type="String" xsi:nil="true"/>
-<parameter_value type="String" xsi:nil="true"/>
-<template_id type="Int32" xsi:nil="true" />
-<template_input type="String" xsi:nil="true"/>
-</IPC_Rule>
-<IPC_Rule>
-<rule_id type="Int32">27</rule_id>
-<parent_rule_id type="Int32">24</parent_rule_id>
-<organism_id type="Int32">26</organism_id>
 <rule_type_id type="Int32">5</rule_type_id>
 <rule_operator type="String" xsi:nil="true"/>
 <parameter_name type="String" xsi:nil="true"/>
 <parameter_value type="String" xsi:nil="true"/>
 <template_id type="Int32">1</template_id>
-<template_input type="String">Salmonella</template_input>
+<template_input type="String">Salmonella (PCR)?</template_input>
 </IPC_Rule>
 <IPC_Rule>
-<rule_id type="Int32">28</rule_id>
-<parent_rule_id type="Int32">24</parent_rule_id>
-<organism_id type="Int32">26</organism_id>
+<rule_id type="Int32">27</rule_id>
+<parent_rule_id type="Int32" xsi:nil="true"/>
+<organism_id type="Int32">8</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
 <parameter_name type="String">TestText</parameter_name>
-<parameter_value type="String">Salmonella PCR</parameter_value>
+<parameter_value type="String">An extended spectrum beta-lactamase producer</parameter_value>
 <template_id type="Int32" xsi:nil="true" />
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
 <IPC_Rule>
-<rule_id type="Int32">29</rule_id>
+<rule_id type="Int32">28</rule_id>
 <parent_rule_id type="Int32" xsi:nil="true"/>
 <organism_id type="Int32">25</organism_id>
 <rule_type_id type="Int32">1</rule_type_id>
@@ -307,24 +307,35 @@
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
 <IPC_Rule>
-<rule_id type="Int32">30</rule_id>
-<parent_rule_id type="Int32">29</parent_rule_id>
+<rule_id type="Int32">29</rule_id>
+<parent_rule_id type="Int32">28</parent_rule_id>
 <organism_id type="Int32">25</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
 <parameter_name type="String">SpecimenType</parameter_name>
-<parameter_value type="String">Faeces</parameter_value>
+<parameter_value type="String">^Faeces$</parameter_value>
 <template_id type="Int32" xsi:nil="true" />
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
 <IPC_Rule>
-<rule_id type="Int32">31</rule_id>
-<parent_rule_id type="Int32">29</parent_rule_id>
+<rule_id type="Int32">30</rule_id>
+<parent_rule_id type="Int32">28</parent_rule_id>
 <organism_id type="Int32">25</organism_id>
+<rule_type_id type="Int32">5</rule_type_id>
+<rule_operator type="String" xsi:nil="true"/>
+<parameter_name type="String" xsi:nil="true"/>
+<parameter_value type="String" xsi:nil="true"/>
+<template_id type="Int32">1</template_id>
+<template_input type="String">Shigella/EIEC PCR</template_input>
+</IPC_Rule>
+<IPC_Rule>
+<rule_id type="Int32">31</rule_id>
+<parent_rule_id type="Int32" xsi:nil="true"/>
+<organism_id type="Int32">16</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
 <parameter_name type="String">TestText</parameter_name>
-<parameter_value type="String">Shigella/EIEC PCR</parameter_value>
+<parameter_value type="String">varicella zoster virus</parameter_value>
 <template_id type="Int32" xsi:nil="true" />
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
@@ -374,17 +385,6 @@
 </IPC_Rule>
 <IPC_Rule>
 <rule_id type="Int32">36</rule_id>
-<parent_rule_id type="Int32">36</parent_rule_id>
-<organism_id type="Int32">16</organism_id>
-<rule_type_id type="Int32">2</rule_type_id>
-<rule_operator type="String">Like</rule_operator>
-<parameter_name type="String">TestText</parameter_name>
-<parameter_value type="String">varicella zoster virus</parameter_value>
-<template_id type="Int32" xsi:nil="true" />
-<template_input type="String" xsi:nil="true"/>
-</IPC_Rule>
-<IPC_Rule>
-<rule_id type="Int32">37</rule_id>
 <parent_rule_id type="Int32" xsi:nil="true"/>
 <organism_id type="Int32">10</organism_id>
 <rule_type_id type="Int32">1</rule_type_id>
@@ -395,8 +395,8 @@
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>
 <IPC_Rule>
-<rule_id type="Int32">38</rule_id>
-<parent_rule_id type="Int32">37</parent_rule_id>
+<rule_id type="Int32">37</rule_id>
+<parent_rule_id type="Int32">36</parent_rule_id>
 <organism_id type="Int32">10</organism_id>
 <rule_type_id type="Int32">5</rule_type_id>
 <rule_operator type="String" xsi:nil="true"/>
@@ -406,46 +406,13 @@
 <template_input type="String">Enterococcus</template_input>
 </IPC_Rule>
 <IPC_Rule>
-<rule_id type="Int32">39</rule_id>
-<parent_rule_id type="Int32">37</parent_rule_id>
+<rule_id type="Int32">38</rule_id>
+<parent_rule_id type="Int32">36</parent_rule_id>
 <organism_id type="Int32">10</organism_id>
 <rule_type_id type="Int32">2</rule_type_id>
 <rule_operator type="String">Like</rule_operator>
 <parameter_name type="String">TestText</parameter_name>
 <parameter_value type="String">vancomycin resistant</parameter_value>
-<template_id type="Int32" xsi:nil="true" />
-<template_input type="String" xsi:nil="true"/>
-</IPC_Rule>
-<IPC_Rule>
-<rule_id type="Int32">40</rule_id>
-<parent_rule_id type="Int32" xsi:nil="true"/>
-<organism_id type="Int32">35</organism_id>
-<rule_type_id type="Int32">1</rule_type_id>
-<rule_operator type="String">And</rule_operator>
-<parameter_name type="String" xsi:nil="true"/>
-<parameter_value type="String" xsi:nil="true"/>
-<template_id type="Int32" xsi:nil="true" />
-<template_input type="String" xsi:nil="true"/>
-</IPC_Rule>
-<IPC_Rule>
-<rule_id type="Int32">41</rule_id>
-<parent_rule_id type="Int32">40</parent_rule_id>
-<organism_id type="Int32">35</organism_id>
-<rule_type_id type="Int32">2</rule_type_id>
-<rule_operator type="String">NotLike</rule_operator>
-<parameter_name type="String">SpecimenType</parameter_name>
-<parameter_value type="String">^Blood culture$</parameter_value>
-<template_id type="Int32" xsi:nil="true" />
-<template_input type="String" xsi:nil="true"/>
-</IPC_Rule>
-<IPC_Rule>
-<rule_id type="Int32">42</rule_id>
-<parent_rule_id type="Int32">40</parent_rule_id>
-<organism_id type="Int32">35</organism_id>
-<rule_type_id type="Int32">2</rule_type_id>
-<rule_operator type="String">Like</rule_operator>
-<parameter_name type="String">TestText</parameter_name>
-<parameter_value type="String">CPE</parameter_value>
 <template_id type="Int32" xsi:nil="true" />
 <template_input type="String" xsi:nil="true"/>
 </IPC_Rule>

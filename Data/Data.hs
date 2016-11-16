@@ -32,5 +32,5 @@ Tag
     type SearchParameter = String
     searchParameterMap :: Map SearchParameter String
     searchParameterMap = fromList [("Test_name", "TestName"),
-      ("Test_text", "TestText"), ("Specimen", "SpecimenType"),
+      ("Test_text", "TestValue"), ("Specimen", "SpecimenType"),
       ("Investigation", "InvestigationType;InvestigationDescription")]

@@ -4,7 +4,8 @@ module Data.IPCExp(
 IPCExp(..),
 toIPCXML,
 setOrganism,
-setParentId
+setParentId,
+depthOfExp
 )
 where
   import Data.Data
@@ -16,11 +17,20 @@ where
     Compound :: RuleOperator -> [IPCExp] -> IPCExp
     Template :: String -> SearchParameter -> IPCExp
     SignificantIsolate :: String -> IPCExp
+    TID :: Int -> SearchParameter -> IPCExp
     ExpID :: Int -> IPCExp -> IPCExp
     ExpOrganism :: Organism -> IPCExp -> IPCExp
     ExpPID :: Int -> IPCExp -> IPCExp
     deriving (Show)
 
+  depthOfExp :: IPCExp -> Int
+  depthOfExp (Compound op exprs) = Prelude.foldl (\x y -> x + depthOfExp y) 1 exprs
+  depthOfExp (ExpID _ expr) = 1 + depthOfExp expr
+  depthOfExp (ExpOrganism _ expr) = 1 + depthOfExp expr
+  depthOfExp (ExpPID _ expr) = 1 + depthOfExp expr
+  depthOfExp _ = 1
+
+  --There must be a better way to box and unbox!
   type IPCContext = (Maybe Int, Maybe Int, Maybe String)
   toIPCXML :: IPCContext -> IPCExp -> [IPCRuleXml]
   toIPCXML (rid,pid,organism) (ExpID ruleId expr) = toIPCXML (Just ruleId, pid, organism) expr
@@ -37,8 +47,12 @@ where
   setParentId expr = expr
 
   setParentId' :: Int -> IPCExp -> IPCExp
-  setParentId' pid (Compound op ls) = (Compound op (Prelude.map (setParentId' pid) $ ls))
-  setParentId' pid expr = (ExpPID pid expr)
+  setParentId' pid (Compound op ls) = (Compound op (Prelude.map (setParentId'' pid) $ ls))
+  setParentId' pid expr = expr
+
+  setParentId'' :: Int -> IPCExp -> IPCExp
+  setParentId'' pid (Compound op ls) = (Compound op (Prelude.map (setParentId'' pid) $ ls))
+  setParentId'' pid expr = (ExpPID pid expr)
 
   toIPCXML' :: (IPCContext,IPCExp) -> [IPCRuleXml]
   toIPCXML' (ctx@(rid,pid,organism),(Compound operator ls)) = IPCRuleXml {
@@ -63,7 +77,18 @@ where
     template = Nothing,
     template_input = Nothing
   }]
-  toIPCXML' ((rid,pid,organism),(Template ttype value)) = [IPCRuleXml {
+  toIPCXML' ((rid,pid,organism),(SignificantIsolate value)) = [IPCRuleXml {
+    rule_id = rid,
+    parent_rule_id = pid,
+    organism_id = organism,
+    rule_type_id = 2,
+    rule_operator = Just "Like",
+    parameter_name = Just "TestValue",
+    parameter_value = Just value,
+    template = Nothing,
+    template_input = Nothing
+  }]
+  toIPCXML' ((rid,pid,organism),(TID tid value)) = [IPCRuleXml {
     rule_id = rid,
     parent_rule_id = pid,
     organism_id = organism,
@@ -71,19 +96,9 @@ where
     rule_operator = Nothing,
     parameter_name = Nothing,
     parameter_value = Nothing,
-    template = Just 0,
+    template = Just tid,
     template_input = Just value
   }]
-  toIPCXML' ((rid,pid,organism),(SignificantIsolate value)) = [IPCRuleXml {
-    rule_id = rid,
-    parent_rule_id = pid,
-    organism_id = organism,
-    rule_type_id = 2,
-    rule_operator = Just "Like",
-    parameter_name = Just "Test_text",
-    parameter_value = Just value,
-    template = Nothing,
-    template_input = Nothing
-  }]
+  toIPCXML' (ctx,(Template ttype value)) = toIPCXML' (ctx,(TID 0 value))
 
   --Significant isolates

@@ -47,11 +47,32 @@ where
                       ]
   }
 
+  resolveID :: Map Tag [IPCExp] -> Map Tag [IPCExp]
+  resolveID ipcr = Data.Map.Strict.fromList $ Data.Map.Strict.foldl foldingFnc [] ipcr
+    where foldingFnc = undefined
+
+  resolveIDExps :: [IPCExp] -> [IPCExp]
+  resolveIDExps exprs = undefined
+
+  resolveIDExp :: Int -> IPCExp -> IPCExp
+  --resolveIDExp i (Compound op exprs) = ExpID i $ (Compound op (Prelude.map resolveIDExp i exprs))
+  resolveIDExp i expr = undefined
+
   resolveTemplates :: Map Tag [IPCExp] -> Map Tag [IPCExp]
-  resolveTemplates r = r
+  resolveTemplates ipcr = Data.Map.Strict.map (Prelude.map mappingFnc) ipcr
+    where getTemplateExp :: String -> Maybe [IPCExp]
+          getTemplateExp str = Data.Map.Strict.lookup str ipcr
+          getTemplateId :: Maybe [IPCExp] -> Int
+          getTemplateId (Just ((ExpID pid _):xs)) = pid
+          getTemplateId _ = 0
+          mappingFnc :: IPCExp -> IPCExp
+          mappingFnc (Template tString sText) = (TID (getTemplateId (getTemplateExp tString)) sText)
+          mappingFnc (Compound op exprs) = (Compound op (Prelude.map mappingFnc exprs))
+          mappingFnc (ExpID eid expr) = (ExpID eid (mappingFnc expr))
+          mappingFnc expr = expr
 
   getRulesForExport :: IPCConfiguration -> [IPCExp]
-  getRulesForExport ipcConfig = concat $ Data.Map.Strict.elems $ resolveTemplates.resolveOrganism.resolvePID $ rules ipcConfig
+  getRulesForExport ipcConfig = concat $ Data.Map.Strict.elems $ resolveTemplates.resolveOrganism.resolvePID.resolveTemplates $ rules ipcConfig
 
   resolvePID :: Map Tag [IPCExp] -> Map Tag [IPCExp]
   resolvePID exprs = Data.Map.Strict.map (\v ->Prelude.map setParentId $ v) exprs

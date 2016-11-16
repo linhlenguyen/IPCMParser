@@ -20,7 +20,9 @@ where
   main = do
     filePath <- getLine
     text <- readFile filePath
-    putStrLn $ show (parseTokens (keys organismIDMap) $ parseString False $ toWords text)
+    tokenised <- return $ parseString False $ toWords text
+    putStrLn $ show tokenised
+    putStrLn $ show (parseTokens (keys organismIDMap) $ tokenised)
 
   --getLine >>= (\a -> getLine >>= (\c -> (getLine >>= (\b -> putStrLn "End")) >> putStrLn c) >> putStrLn a)
   --Program flow
