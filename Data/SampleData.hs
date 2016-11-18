@@ -48,15 +48,17 @@ where
   }
 
   resolveID :: Map Tag [IPCExp] -> Map Tag [IPCExp]
-  resolveID ipcr = Data.Map.Strict.fromList $ Data.Map.Strict.foldl foldingFnc [] ipcr
+  resolveID ipcr = Data.Map.Strict.fromList $ Data.Map.foldlWithKey foldingFnc [] ipcr
     where foldingFnc = undefined
 
-  resolveIDExps :: [IPCExp] -> [IPCExp]
-  resolveIDExps exprs = undefined
+  resolveIDExps :: Int -> [IPCExp] -> [IPCExp]
+  resolveIDExps si exprs = map snd $ foldl foldf [si,[]] exprs
+    where foldf :: [(Int,IPCExp)] -> IPCExp -> (Int,[IPCExp)]
+          foldf (i,ls) nexpr = (i + depthOfExp nexpr,(resolveIDExp i nexpr):ls)
 
   resolveIDExp :: Int -> IPCExp -> IPCExp
-  --resolveIDExp i (Compound op exprs) = ExpID i $ (Compound op (Prelude.map resolveIDExp i exprs))
-  resolveIDExp i expr = undefined
+  resolveIDExp i (Compound op exprs) = ExpID i $ (Compound op (resolveIDExps (i+1) exprs))
+  resolveIDExp i expr = (ExpID i expr)
 
   resolveTemplates :: Map Tag [IPCExp] -> Map Tag [IPCExp]
   resolveTemplates ipcr = Data.Map.Strict.map (Prelude.map mappingFnc) ipcr

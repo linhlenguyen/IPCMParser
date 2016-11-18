@@ -23,6 +23,9 @@ where
     ExpPID :: Int -> IPCExp -> IPCExp
     deriving (Show)
 
+  depthOfExps :: [IPCExp] -> Int
+  depthOfExps ls = Prelude.foldl depthOfExp 0 ls
+
   depthOfExp :: IPCExp -> Int
   depthOfExp (Compound op exprs) = Prelude.foldl (\x y -> x + depthOfExp y) 1 exprs
   depthOfExp (ExpID _ expr) = 1 + depthOfExp expr
