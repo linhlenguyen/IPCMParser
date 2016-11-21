@@ -5,7 +5,8 @@ IPCExp(..),
 toIPCXML,
 setOrganism,
 setParentId,
-depthOfExp
+expCount,
+expsCount
 )
 where
   import Data.Data
@@ -23,15 +24,15 @@ where
     ExpPID :: Int -> IPCExp -> IPCExp
     deriving (Show)
 
-  depthOfExps :: [IPCExp] -> Int
-  depthOfExps ls = Prelude.foldl depthOfExp 0 ls
+  expsCount :: [IPCExp] -> Int
+  expsCount ls = Prelude.foldl (\x expr -> x + expCount expr) 0 ls
 
-  depthOfExp :: IPCExp -> Int
-  depthOfExp (Compound op exprs) = Prelude.foldl (\x y -> x + depthOfExp y) 1 exprs
-  depthOfExp (ExpID _ expr) = 1 + depthOfExp expr
-  depthOfExp (ExpOrganism _ expr) = 1 + depthOfExp expr
-  depthOfExp (ExpPID _ expr) = 1 + depthOfExp expr
-  depthOfExp _ = 1
+  expCount :: IPCExp -> Int
+  expCount (Compound op exprs) = 1 + expsCount exprs
+  expCount (ExpID _ expr) = 1 + expCount expr
+  expCount (ExpOrganism _ expr) = 1 + expCount expr
+  expCount (ExpPID _ expr) = 1 + expCount expr
+  expCount _ = 1
 
   --There must be a better way to box and unbox!
   type IPCContext = (Maybe Int, Maybe Int, Maybe String)

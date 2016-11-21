@@ -13,13 +13,14 @@ where
     text <- readFile filePath
     putStrLn $ show (parseString False $ toWords text)
 
-  data Token = String | Operator deriving (Show, Eq)
+  data Token = String | Operator | Invalid deriving (Show, Eq)
 
-  parseQuote :: Token -> [String] -> [(Token,String)]
-  parseQuote _ [] = []
-  parseQuote t [x] = [(t,x)]
-  parseQuote t (x:xs) = foldl foldingFnc [(t,[x])] xs
-    where foldingFnc :: [(Token, String)] -> Char -> 
+  parseQuote :: [String] -> [(Token,String)]
+  parseQuote [] = []
+  parseQuote [x] = [(Operator,x)]
+  parseQuote (x:xs) = foldl foldingFnc [] xs
+    where foldingFnc = [(Token, String)] -> Char -> [(Token, String)]
+          foldingFnc = undefined
 
   parseString :: Bool -> [String] -> [String]
   parseString _ [] = []
