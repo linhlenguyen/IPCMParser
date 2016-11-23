@@ -5,7 +5,9 @@ match',
 toLower,
 toWords,
 parseFile,
-parseString
+parseString,
+parseQuote,
+Token(..)
 )
 where
   parseFile :: FilePath -> IO ()
@@ -13,14 +15,23 @@ where
     text <- readFile filePath
     putStrLn $ show (parseString False $ toWords text)
 
-  data Token = String | Operator | Invalid deriving (Show, Eq)
+  data Token = String | Other deriving (Show, Eq)
 
-  parseQuote :: [String] -> [(Token,String)]
+  getToken :: String -> Token
+  getToken str = undefined
+
+  parseQuote :: String -> [(Token,String)]
   parseQuote [] = []
-  parseQuote [x] = [(Operator,x)]
-  parseQuote (x:xs) = foldl foldingFnc [] xs
-    where foldingFnc = [(Token, String)] -> Char -> [(Token, String)]
-          foldingFnc = undefined
+  parseQuote [x] = [(Other,[x])]
+  parseQuote xs = reverse $ map (\(x,y) -> (x, reverse y)) $ snd $ foldl foldingFnc ([],[(Syntax,[])]) xs
+    where foldingFnc :: (String,[(Token, String)]) -> Char -> (String,[(Token, String)])
+          foldingFnc ac@(str,((o,s):xs)) c = let acString = if (any (\k -> k == c) [' ','\n','\r']) && o != String then [] else str ++ [c]
+                                                 token = getToken acString in
+                                  if c == '"'
+                                  then if ((fst $ head ac) == Syntax) then (String, []) : ac
+                                       else (Syntax,[]) : ac
+                                  else if (null $ tail ac) then [(o,c:s)]
+                                       else (o, c:s) : tail ac
 
   parseString :: Bool -> [String] -> [String]
   parseString _ [] = []

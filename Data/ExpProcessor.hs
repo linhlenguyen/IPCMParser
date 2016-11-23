@@ -1,5 +1,4 @@
 module Data.ExpProcessor(
-writeToFile
 )
 where
   import Data.Data
@@ -52,18 +51,3 @@ where
           mappingFnc k ls = if isOrganism k then (Prelude.map (setOrganism k) $ ls) else ls
           isOrganism :: Tag -> Bool
           isOrganism k = elem k $ Data.Map.Strict.keys organismIDMap
-
-  exportXmlToString :: [IPCRuleXml] -> [String]
-  exportXmlToString xml = Prelude.map toXML $ Data.List.sort xml
-
-  exportOrganism :: [IPCExp] -> [IPCRuleXml]
-  exportOrganism exps = (concatMap (toIPCXML (Nothing,Nothing,Nothing)) $ exps)
-
-  exportFromSample :: [IPCExp]
-  exportFromSample = getRulesForExport sampleData
-
-  sampleRuleString :: [String]
-  sampleRuleString = exportXmlToString $ exportOrganism exportFromSample
-
-  writeToFile :: String -> IO ()
-  writeToFile fileName = writeFile fileName (Prelude.foldl (++) "" sampleRuleString)

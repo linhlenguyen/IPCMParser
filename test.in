@@ -1,8 +1,9 @@
 Significant_isolates
-"{0} ISOLATED"
-"{0} Identified"
-"{0} Positive"
-"Positive {0}"
+Or
+Includes Test_text "{0} ISOLATED"
+Includes Test_text "{0} Identified"
+Includes Test_text "{0} Positive"
+Includes Test_text "Positive {0}"
 
 Campylobacter
 And Is Specimen "Faeces"

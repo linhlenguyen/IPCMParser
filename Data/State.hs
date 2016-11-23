@@ -42,7 +42,6 @@ where
   type RuleTag = String
   --Store IPC states
   data IPCConfiguration = IPCConfiguration{
-      trust_code :: String,
       rules :: Map RuleTag [IPCExp]
   } deriving (Show)
 
