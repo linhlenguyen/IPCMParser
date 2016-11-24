@@ -4,42 +4,8 @@ match,
 match',
 toLower,
 toWords,
-parseFile,
-parseString,
-parseQuote,
-Token(..)
 )
 where
-  parseFile :: FilePath -> IO ()
-  parseFile filePath = do
-    text <- readFile filePath
-    putStrLn $ show (parseString False $ toWords text)
-
-  data Token = String | Other deriving (Show, Eq)
-
-  getToken :: String -> Token
-  getToken str = undefined
-
-  parseQuote :: String -> [(Token,String)]
-  parseQuote [] = []
-  parseQuote [x] = [(Other,[x])]
-  parseQuote xs = reverse $ map (\(x,y) -> (x, reverse y)) $ snd $ foldl foldingFnc ([],[(Syntax,[])]) xs
-    where foldingFnc :: (String,[(Token, String)]) -> Char -> (String,[(Token, String)])
-          foldingFnc ac@(str,((o,s):xs)) c = let acString = if (any (\k -> k == c) [' ','\n','\r']) && o != String then [] else str ++ [c]
-                                                 token = getToken acString in
-                                  if c == '"'
-                                  then if ((fst $ head ac) == Syntax) then (String, []) : ac
-                                       else (Syntax,[]) : ac
-                                  else if (null $ tail ac) then [(o,c:s)]
-                                       else (o, c:s) : tail ac
-
-  parseString :: Bool -> [String] -> [String]
-  parseString _ [] = []
-  parseString _ [x] = x:[]
-  parseString False (x:xs) = if (head x) == '"' then parseString True ((tail x) : xs)
-                             else x : parseString False xs
-  parseString True (x:xs) = if (last x) == '"' then (init x) : parseString False xs
-                             else parseString True ((x ++ " " ++ (head xs)):(tail xs))
 
   toWords :: String -> [String]
   toWords (x:xs) = reverse $ map reverse $ foldl foldingFnc [[x]] xs

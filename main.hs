@@ -8,6 +8,8 @@ where
   import Data.ExpProcessor
   import Data.StringUtil
   import Data.IPCRuleParser
+  import Processor.Lexer
+  import Processor.SemanticAnalyser
 
   mainLoop :: String -> IO ()
   mainLoop state = getLine >>= (\cmd -> case cmd of {
@@ -19,7 +21,7 @@ where
   main = do
     filePath <- getLine
     text <- readFile filePath
-    tokenised <- return $ Prelude.map (\(x,y) -> if x == String then (x,[y]) else (x,toWords y)) $ parseQuote text
+    tokenised <- return $ show $ tokenise $ toWords text
     putStrLn $ show tokenised
     --putStrLn $ show (parseTokens (keys organismIDMap) $ tokenised)
 
