@@ -18,7 +18,5 @@ where
 
   splitToken :: [(Token, String)] -> Map Tag [(Token, String)]
   splitToken ls = fromList $ foldf [] ls
-    where foldf :: [(Tag, [(Token,String)])] -> (Token, String) -> [(Tag, [(Token, String)])]
-          foldf = undefined
-
-  
+    where foldf :: ([(Token,String)],[(Tag, [(Token,String)])]) -> (Token, String) -> ([(Token,String)],[(Tag, [(Token, String)])])
+          foldf (ac,ls) ts = 
