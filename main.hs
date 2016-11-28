@@ -9,7 +9,8 @@ where
   import Data.StringUtil
   import Data.IPCRuleParser
   import Processor.Lexer
-  import Processor.SemanticAnalyser
+  import Processor.Analyser
+  import Data.ExpExporter
 
   mainLoop :: String -> IO ()
   mainLoop state = getLine >>= (\cmd -> case cmd of {
@@ -21,8 +22,9 @@ where
   main = do
     filePath <- getLine
     text <- readFile filePath
-    tokenised <- return $ show $ tokenise $ toWords text
-    putStrLn $ show tokenised
+    tokenised <- return $ exportRules $ getRulesForExport $ tokenToExp $ tokenise $ toWords text
+    putStrLn $ tokenised
+    writeFile "test2.xml" $ tokenised
     --putStrLn $ show (parseTokens (keys organismIDMap) $ tokenised)
 
   --getLine >>= (\a -> getLine >>= (\c -> (getLine >>= (\b -> putStrLn "End")) >> putStrLn c) >> putStrLn a)

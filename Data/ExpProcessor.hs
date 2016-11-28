@@ -1,4 +1,5 @@
 module Data.ExpProcessor(
+getRulesForExport
 )
 where
   import Data.Data
@@ -39,8 +40,8 @@ where
           mappingFnc (ExpID eid expr) = (ExpID eid (mappingFnc expr))
           mappingFnc expr = expr
 
-  getRulesForExport :: IPCConfiguration -> [IPCExp]
-  getRulesForExport ipcConfig = concat $ Data.Map.Strict.elems $ resolveOrganism.resolvePID.resolveID.resolveTemplates $ rules ipcConfig
+  getRulesForExport :: Map Tag [IPCExp] -> [IPCExp]
+  getRulesForExport exprs = concat $ Data.Map.Strict.elems $ resolveOrganism.resolvePID.resolveID.resolveTemplates $ exprs
 
   resolvePID :: Map Tag [IPCExp] -> Map Tag [IPCExp]
   resolvePID exprs = Data.Map.Strict.map (\v ->Prelude.map setParentId $ v) exprs

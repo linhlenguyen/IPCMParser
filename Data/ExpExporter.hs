@@ -1,9 +1,13 @@
 module Data.ExpExporter(
-writeToFile
+exportRules
 )
   where
+    import Data.Data
+    import Data.State
     import Data.IPCRuleXml
     import Data.IPCExp
+    import Data.List
+    import Data.Map.Strict
 
     exportXmlToString :: [IPCRuleXml] -> [String]
     exportXmlToString xml = Prelude.map toXML $ Data.List.sort xml
@@ -11,14 +15,17 @@ writeToFile
     exportOrganism :: [IPCExp] -> [IPCRuleXml]
     exportOrganism exps = (concatMap (toIPCXML (Nothing,Nothing,Nothing)) $ exps)
 
-    exportFromSample :: [IPCExp]
-    exportFromSample = getRulesForExport sampleData
+    --exportFromSample :: [IPCExp]
+    --exportFromSample = getRulesForExport sampleData
 
-    sampleRuleString :: [String]
-    sampleRuleString = exportXmlToString $ exportOrganism exportFromSample
+    exportRules :: [IPCExp] -> String
+    exportRules exprs = Prelude.foldl (++) "" $ exportXmlToString $ exportOrganism exprs
 
-    writeToFile :: String -> IO ()
-    writeToFile fileName = writeFile fileName (Prelude.foldl (++) "" sampleRuleString)
+    --sampleRuleString :: [String]
+    --sampleRuleString = exportXmlToString $ exportOrganism exportFromSample
+
+    --writeToFile :: String -> IO ()
+    --writeToFile fileName = writeFile fileName (Prelude.foldl (++) "" sampleRuleString)
 
     sampleData :: IPCConfiguration
     sampleData = IPCConfiguration {
