@@ -41,7 +41,7 @@ where
           mappingFnc expr = expr
 
   getRulesForExport :: Map Tag [IPCExp] -> [IPCExp]
-  getRulesForExport exprs = concat $ Data.Map.Strict.elems $ resolveOrganism.resolvePID.resolveID.resolveTemplates $ exprs
+  getRulesForExport exprs = concat $ Data.Map.Strict.elems $ resolveOrganism.resolvePID.resolveTemplates.resolveID $ exprs
 
   resolvePID :: Map Tag [IPCExp] -> Map Tag [IPCExp]
   resolvePID exprs = Data.Map.Strict.map (\v ->Prelude.map setParentId $ v) exprs

@@ -10,7 +10,7 @@ where
   getToken :: String -> Token
   getToken str = case getToken' str of {
     Just a -> a;
-    Nothing -> TInvalid;
+    Nothing -> error $ "Invalid token token found " ++ str;
   }
 
   --Improve by single pass tokeniser. Parse characters instead of strings
@@ -39,9 +39,9 @@ where
     ("Test_text", TSearchParameter),
     ("Significant_isolates", TTemplate),
     ("MRSA", TOrganism), ("CDT", TOrganism), ("ESBL", TOrganism),
-    ("Tuberculosis", TOrganism), ("VRE", TOrganism), ("Group A streptococcus", TOrganism),
+    ("Tuberculosis", TOrganism), ("VRE", TOrganism), ("Group_A_streptococcus", TOrganism),
     ("Norovirus", TOrganism), ("Adenovirus", TOrganism), ("Rotavirus", TOrganism),
-    ("H1N1", TOrganism), ("Varicella-zoster virus", TOrganism),
+    ("H1N1", TOrganism), ("Varicella-zoster_virus", TOrganism),
     ("MRSA bacteraemia", TOrganism), ("MSSA", TOrganism), ("E.coli", TOrganism),
     ("Campylobacter", TOrganism), ("Shigella", TOrganism), ("Salmonella", TOrganism),
     ("RSV", TOrganism), ("Gentamicin resistant organisms", TOrganism),

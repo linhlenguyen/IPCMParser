@@ -10,9 +10,6 @@ where
   import Processor.Lexer
   import Data.IPCExp
 
-  checkToken :: [(Token, String)] -> Bool
-  checkToken ls = any (\(t,s) -> t == TInvalid) ls
-
   topLevelTokens :: [Token]
   topLevelTokens = [TTemplate, TOrganism]
 
@@ -33,4 +30,4 @@ where
   extractExps ((TCompound, op):xs) = (Compound op (extractExps xs)):[]
   extractExps ((TStringComparison, op):(TSearchParameter,sp):(TString,st):xs) = (StringComparison op sp st):(extractExps xs)
   extractExps ((TTemplate,tt):(TString,st):xs) = (Template tt st):(extractExps xs)
-  extractExps _ = []
+  extractExps ((t,s):xs) = error $ "invalid token found " ++ (show t) ++ " " ++ s ++ " followed by " ++ (show xs)

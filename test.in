@@ -24,7 +24,7 @@ ESBL
 Includes Test_text "An extended spectrum beta-lactamase producer"
 
 Influenza
-Includes Test_test "Influenza (A|B) PCR"
+Includes Test_text "Influenza (A|B) PCR"
 
 MRSA
 And Is_not Specimen "Blood culture"
@@ -42,7 +42,7 @@ Includes Test_text "RSV(immunochromatographic)"
 
 Salmonella
 And Is Specimen "Faeces"
-    And Siginificant_isolates "Salmonella"
+    And Significant_isolates "Salmonella"
         Includes Test_text "Salmonella PCR"
 
 Shigella

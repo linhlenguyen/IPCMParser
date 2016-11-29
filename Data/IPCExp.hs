@@ -55,7 +55,7 @@ where
   setParentId' pid expr = expr
 
   setParentId'' :: Int -> IPCExp -> IPCExp
-  setParentId'' pid (Compound op ls) = (Compound op (Prelude.map (setParentId'' pid) $ ls))
+  setParentId'' pid (ExpID pid' (Compound op ls)) = (ExpPID pid (ExpID pid' (Compound op (Prelude.map (setParentId'' pid') $ ls))))
   setParentId'' pid expr = (ExpPID pid expr)
 
   toIPCXML' :: (IPCContext,IPCExp) -> [IPCRuleXml]
