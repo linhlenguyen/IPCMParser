@@ -1,9 +1,8 @@
-module Data.ExpProcessor(
+module Processor.ExpProcessor(
 getRulesForExport
 )
 where
   import Data.Data
-  import Data.State
   import Data.IPCExp
   import Data.IPCRuleXml
   import Data.Map.Strict
