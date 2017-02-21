@@ -1,7 +1,7 @@
 # IPCMParser
 **IPCM rules parser**
 
-**Reads in rules as text in Tree-like structure and returns xml to be stored in sql database**
+**Reads in rules in olain text and returns XML structure with automatic Id and parent Id assignment**
 
 *For example*
 ~~~
@@ -18,13 +18,13 @@ Or Is A "String A"
 <rule_id>2</rule_id>
 <parent_id>1</parent_id>
 <operator>Is</operator>
-<operan>A</operan>
+<operand>A</operand>
 <value>String A</value>
 
 <rule_id>3</rule_id>
 <parent_id>1</parent_id>
 <operator>Includes</operator>
-<operan>B</operan>
+<operand>B</operand>
 <value>String B</value>
 
 <rule_id>4</rule_id>
@@ -34,13 +34,13 @@ Or Is A "String A"
 <rule_id>5</rule_id>
 <parent_id>4</parent_id>
 <operator>Is</operator>
-<operan>C</operan>
+<operand>C</operand>
 <value>String C</value>
 
 <rule_id>6</rule_id>
 <parent_id>4</parent_id>
 <operator>Includes</operator>
-<operan>D</operan>
+<operand>D</operand>
 <value>String D</value>
 ~~~
 
