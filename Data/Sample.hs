@@ -3,13 +3,14 @@ sampleData
 )
 where
   import Data.Map.Strict
+  import Data.Data
   import Data.IPCExp
 
   exportFromSample :: [IPCExp]
-  exportFromSample = getRulesForExport sampleData
+  exportFromSample = undefined --getRulesForExport sampleData
 
   sampleRuleString :: [String]
-  sampleRuleString = exportXmlToString $ exportOrganism exportFromSample
+  sampleRuleString = undefined --exportXmlToString $ exportOrganism exportFromSample
 
   writeToFile :: String -> IO ()
   writeToFile fileName = writeFile fileName (Prelude.foldl (++) "" sampleRuleString)

@@ -10,7 +10,7 @@ where
   toWords :: String -> [String]
   toWords (x:xs) = reverse $ map reverse $ foldl foldingFnc [[x]] xs
     where foldingFnc :: [String] -> Char -> [String]
-          foldingFnc ls c = if any (\k -> k == c) [' ',',',';','\n','\r'] then
+          foldingFnc ls c = if any (\k -> k == c) [' ','\n','\r','\t'] then
                               if (null $ head ls) then ls
                               else [] : ls
                             else (c : head ls) : tail ls

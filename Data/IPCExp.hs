@@ -1,4 +1,5 @@
 {-# LANGUAGE GADTs #-}
+{-# LANGUAGE BangPatterns #-}
 
 module Data.IPCExp(
 IPCExp(..),
@@ -6,23 +7,38 @@ toIPCXML,
 setOrganism,
 setParentId,
 expCount,
-expsCount
+expsCount,
+expFoldr
 )
 where
   import Data.Data
   import Data.Map.Strict
   import Data.IPCRuleXml
+  import Data.Functor
+  import Data.Foldable
+  import Data.Traversable
 
   data IPCExp where
     StringComparison :: RuleOperator -> SearchParameter -> SearchValue -> IPCExp
-    Compound :: RuleOperator -> [IPCExp] -> IPCExp
     Template :: String -> SearchParameter -> IPCExp
     SignificantIsolate :: String -> IPCExp
+    Compound :: RuleOperator -> [IPCExp] -> IPCExp
     TID :: Int -> SearchParameter -> IPCExp
     ExpID :: Int -> IPCExp -> IPCExp
     ExpOrganism :: Organism -> IPCExp -> IPCExp
     ExpPID :: Int -> IPCExp -> IPCExp
     deriving (Show)
+
+  expMap f (StringComparison op param value) = (StringComparison op param (f value))
+  expMap f (Template t value) = (Template t (f value))
+  expMap f ipcExp = ipcExp
+
+  expFoldr :: (IPCExp -> b -> b) -> b -> IPCExp -> b
+  expFoldr f acc a@(ExpID i ipcExp) = f a (expFoldr f acc ipcExp)
+  expFoldr f acc a@(ExpOrganism o ipcExp) = f a (expFoldr f acc ipcExp)
+  expFoldr f acc a@(ExpPID i ipcExp) = f a (expFoldr f acc ipcExp)
+  expFoldr f acc a@(Compound o ipcExps) = f a (Prelude.foldl (expFoldr f) acc ipcExps)
+  expFoldr f acc ipcExp = f ipcExp acc
 
   expsCount :: [IPCExp] -> Int
   expsCount ls = Prelude.foldl (\x expr -> x + expCount expr) 0 ls
