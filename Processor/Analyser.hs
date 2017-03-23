@@ -10,9 +10,6 @@ where
   import Processor.Lexer
   import Data.IPCExp
 
-  topLevelTokens :: [Token]
-  topLevelTokens = [TTemplate, TOrganism]
-
   splitByOrganism :: [(Token, String)] -> [[(Token, String)]]
   splitByOrganism (x:xs) = reverse $ Prelude.map reverse $ Prelude.foldl foldf [[x]] xs
     where foldf :: [[(Token, String)]] -> (Token, String) -> [[(Token, String)]]

@@ -10,7 +10,7 @@ where
   getToken :: String -> Token
   getToken str = case getToken' str of {
     Just a -> a;
-    Nothing -> error $ "Invalid token token found " ++ str;
+    Nothing -> error $ "Invalid token found " ++ str;
   }
 
   --Improve by single pass tokeniser. Parse characters instead of strings
