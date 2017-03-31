@@ -14,7 +14,8 @@ where
 
   main :: IO ()
   main = do
-    filePath <- getLine
+    input <- getArgs
+    let filePath = concat input
     text <- readFile filePath
     tokenised <- return $ exportRules $ getRulesForExport $ tokenToExp $ tokenise $ toWords text
     writeFile "test.xml" $ tokenised
